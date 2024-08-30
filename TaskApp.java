@@ -25,7 +25,7 @@ public class TaskApp {
             System.out.println("9. Exit");
             System.out.print("Choose an option: ");
             int choice = sc.nextInt();
-            sc.nextLine(); 
+            sc.nextLine();
 
             switch (choice) {
                 case 1:
@@ -48,35 +48,36 @@ public class TaskApp {
                 case 2:
                     System.out.print("Enter task index to update: ");
                     int updateIndex = sc.nextInt();
-                    sc.nextLine(); 
+                    sc.nextLine();
 
                     Optional<Task> taskToUpdate = taskManager.findTaskByIndex(updateIndex);
-                    if (taskToUpdate.isPresent()) {
-                        System.out.print("Enter new title: ");
-                        title = sc.nextLine();
-                        System.out.print("Enter new description: ");
-                        description = sc.nextLine();
-                        System.out.print("Enter new due date (YYYY-MM-DD): ");
-                        dueDate = LocalDate.parse(sc.nextLine());
-                        System.out.print("Enter new priority (HIGH, MEDIUM, LOW): ");
-                        priority = Priority.valueOf(sc.nextLine().toUpperCase());
-                        System.out.print("Enter new status (PENDING, IN_PROGRESS, COMPLETED): ");
-                        status = Status.valueOf(sc.nextLine().toUpperCase());
-
-                        Task updatedTask = new Task(title, description, dueDate, priority, status);
-                        taskManager.updateTask(updateIndex, updatedTask);
-                        System.out.println();
-                        System.out.println("Task updated successfully!");
-                    } else {
+                    if (!taskToUpdate.isPresent()) {
                         System.out.println();
                         System.out.println("Task not found!");
+                        break;
                     }
+                    System.out.print("Enter new title: ");
+                    title = sc.nextLine();
+                    System.out.print("Enter new description: ");
+                    description = sc.nextLine();
+                    System.out.print("Enter new due date (YYYY-MM-DD): ");
+                    dueDate = LocalDate.parse(sc.nextLine());
+                    System.out.print("Enter new priority (HIGH, MEDIUM, LOW): ");
+                    priority = Priority.valueOf(sc.nextLine().toUpperCase());
+                    System.out.print("Enter new status (PENDING, IN_PROGRESS, COMPLETED): ");
+                    status = Status.valueOf(sc.nextLine().toUpperCase());
+
+                    Task updatedTask = new Task(title, description, dueDate, priority, status);
+                    taskManager.updateTask(updateIndex, updatedTask);
+                    System.out.println();
+                    System.out.println("Task updated successfully!");
+
                     break;
 
                 case 3:
                     System.out.print("Enter task index to delete: ");
                     int deleteIndex = sc.nextInt();
-                    sc.nextLine(); 
+                    sc.nextLine();
                     Optional<Task> taskTodelete = taskManager.findTaskByIndex(deleteIndex);
                     if (!taskTodelete.isPresent()) {
                         System.out.println();
@@ -93,11 +94,12 @@ public class TaskApp {
                     if (allTasks.isEmpty()) {
                         System.out.println();
                         System.out.println("No tasks available.");
-                    } else {
-                        System.out.println();
-                        System.out.println("All Tasks:");
-                        allTasks.forEach(System.out::println);
+                        break;
                     }
+                    System.out.println();
+                    System.out.println("All Tasks:");
+                    allTasks.forEach(System.out::println);
+
                     break;
 
                 case 5:
@@ -107,10 +109,11 @@ public class TaskApp {
                     if (statusFilteredTasks.isEmpty()) {
                         System.out.println();
                         System.out.println("No tasks found with the status: " + status);
-                    } else {
-                        System.out.println();
-                        statusFilteredTasks.forEach(System.out::println);
+                        break;
                     }
+                    System.out.println();
+                    statusFilteredTasks.forEach(System.out::println);
+
                     break;
 
                 case 6:
@@ -120,10 +123,11 @@ public class TaskApp {
                     if (priorityFilteredTasks.isEmpty()) {
                         System.out.println();
                         System.out.println("No tasks found with the priority: " + priority);
-                    } else {
-                        System.out.println();
-                        priorityFilteredTasks.forEach(System.out::println);
+                        break;
                     }
+                    System.out.println();
+                    priorityFilteredTasks.forEach(System.out::println);
+
                     break;
 
                 case 7:
@@ -133,10 +137,11 @@ public class TaskApp {
                     if (dueDateFilteredTasks.isEmpty()) {
                         System.out.println();
                         System.out.println("No tasks found with the due date: " + dueDate);
-                    } else {
-                        System.out.println();
-                        dueDateFilteredTasks.forEach(System.out::println);
+                        break;
                     }
+                    System.out.println();
+                    dueDateFilteredTasks.forEach(System.out::println);
+
                     break;
 
                 case 8:
@@ -146,14 +151,15 @@ public class TaskApp {
                     if (searchedTasks.isEmpty()) {
                         System.out.println();
                         System.out.println("No tasks found containing the keyword: " + keyword);
-                    } else {
-                        System.out.println();
-                        searchedTasks.forEach(System.out::println);
+                        break;
                     }
+                    System.out.println();
+                    searchedTasks.forEach(System.out::println);
+
                     break;
 
                 case 9:
-                System.out.println();
+                    System.out.println();
                     System.out.println("Exiting...");
                     sc.close();
                     return;
